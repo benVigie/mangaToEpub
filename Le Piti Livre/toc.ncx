@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
+	<head>
+		<meta content="0c159d12-f5fe-4323-8194-f5c652b89f5c" name="dtb:uid"/>
+		<meta content="2" name="dtb:depth"/>
+	</head>
+
+	<docTitle>
+		<text>le piti livre (docT)</text>
+	</docTitle>
+
+	<navMap>
+		<navPoint id="a1" playOrder="1">
+			<navLabel>
+				<text>La seule page</text>
+			</navLabel>
+			<content src="test.xhtml"/>
+		</navPoint>
+		<navPoint id="a2" playOrder="2">
+			<navLabel>
+				<text>Manga page test</text>
+			</navLabel>
+			<content src="manga.html"/>
+		</navPoint>
+		<navPoint id="a3" playOrder="3">
+			<navLabel>
+				<text>Manga page test 2</text>
+			</navLabel>
+			<content src="manga2.html"/>
+		</navPoint>
+		<navPoint id="a4" playOrder="4">
+			<navLabel>
+				<text>End credits</text>
+			</navLabel>
+			<content src="endPage.html"/>
+		</navPoint>
+	</navMap>
+</ncx>
