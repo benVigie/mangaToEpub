@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		
+		<title>Manga to .epub</title>
+		 
+		<link href="css/style.css" rel="stylesheet" media="all"/>
+		 
+		<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+
+	</head>
+	<body>
+
+		<input type="text" placeholder="epub name" name="epub-name" id="epub-name" />
+		<input type="text" placeholder="Link to picture folder" name="epub-pic-folder" id="epub-pic-folder" />
+
+		<input type="text" placeholder="Description (optional)" name="epub-desc" id="epub-desc" />
+		<input type="text" placeholder="Output folder (optional)" name="epub-out-folder" id="epub-out-folder" />
+	
+		<input type="button" value="Let's convert !" onClick="sendConvertRequest();" />
+
+		<div id="box-message"></div>
+
+	</body>
+	<script type="text/javascript">
+
+		/**
+		*	Send an ajax call to the converter manager
+		*
+		*	@param: 
+		*	@return: 
+		*/
+		function sendConvertRequest() {
+			var name = $('#epub-name').val(),
+				pic_folder = $('#epub-pic-folder').val(),
+				desc = $('#epub-desc').val(),
+				output_folder = $('#epub-out-folder').val();
+
+			// We need some basic informations
+			if (!name || !pic_folder) {
+				displayMessage('I need at least an epub name and a picture folder !', true);
+				return;
+			}
+
+			// Send request
+			$.ajax({
+				type: 'POST',
+				url: 'epubCreator.php',
+				data: {
+					e_name: name,
+					e_pics: pic_folder,
+					e_desc: desc,
+					e_out: output_folder
+				},
+				success: onConvertResponse,
+				dataType: 'json'
+			});
+
+		};
+
+		/**
+		*	Read the server's response to display conversion result
+		*
+		*	@param: {Object} data 	Server response object
+		*	@return: 
+		*/
+		function onConvertResponse(data) {
+			var messageBox = document.getElementById('box-message');
+
+			// Print success message
+			if (data.success) {
+				displayMessage(data.success, false);
+			}
+			else if (data.error) {
+				displayMessage(data.error, true);
+			}
+			else {
+				displayMessage('Cannot read server response !', true);
+			}
+		};
+
+		/**
+		*	Read the server's response to display conversion result
+		*
+		*	@param: {Object} data 	Server response object
+		*	@return: 
+		*/
+		function displayMessage(message, isAnError) {
+			var messageBox = document.getElementById('box-message');
+
+			messageBox.innerHTML = message;
+
+			// Reset old style
+			messageBox.classList.remove('error-message');
+			messageBox.classList.remove('success-message');
+
+			
+			if (isAnError) {
+				messageBox.classList.add('error-message');
+			}
+			else {
+				messageBox.classList.add('success-message');
+			}
+
+		};
+
+	</script>
+</html>
