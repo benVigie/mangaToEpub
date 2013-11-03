@@ -1,7 +1,8 @@
 <?php
 
-	error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
-	//error_reporting(0);
+	error_reporting(0);
+	// If you want to debug, better to uncomment the next line to have traces
+	// error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 	
 	
 	################### GLOBAL FONCTIONS ##########################
